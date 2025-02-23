@@ -211,7 +211,7 @@ body {
 }
 
 .text h2 {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 800;
     margin: 2rem 0;
     transition: 1s ease-in-out;
@@ -277,6 +277,62 @@ body {
     transform: translate(100%, 0);
     right: 50%;
 }
+
+
+.google-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: var(--gray) !important;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    color: var(--black) !important;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.google-btn img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.google-btn:hover {
+    background-color: #f1f1f1;
+    color: var(--black);
+}
+
+
+.error {
+    color: red;
+    font-size: 15px;
+}
+
+
+
+.form.forgot-password {
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 1.5rem;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transform: scale(0);
+    transition: .5s ease-in-out;
+    transition-delay: 1s;
+}
+
+.container.forgot-password::before {
+    transform: translate(50%, 0);
+    right: 50%;
+}
+
+.container.forgot-password .form.forgot-password {
+    transform: scale(1);
+}
+
+
 
 /* RESPONSIVE */
 
@@ -353,29 +409,64 @@ body {
     <div id="container" class="container">
 		<!-- FORM SECTION -->
 		<div class="row">
+
+          
+
+
+
+
+
+
+            
 			<!-- SIGN UP -->
 			<div class="col align-items-center flex-col sign-up">
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-up">
-						<div class="input-group">
-							<i class='bx bxs-user'></i>
-							<input type="text" placeholder="Username">
-						</div>
-						<div class="input-group">
-							<i class='bx bx-mail-send'></i>
-							<input type="email" placeholder="Email">
-						</div>
-						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i>
-							<input type="password" placeholder="Password">
-						</div>
-						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i>
-							<input type="password" placeholder="Confirm password">
-						</div>
-						<button>
-							Sign up
-						</button>
+                        
+                        <form id="signup-form" method="post"> 
+                            <h2>Create Account</h2>
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                <input type="text" id="username" placeholder="Username" name="name">
+                                <span class="error" id="username-error"></span>
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bx-mail-send'></i>
+                                <input type="email" id="email" placeholder="Email" name="email">
+                                <span class="error" id="email-error"></span>
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" id="password" placeholder="Password" name="password">
+                                <span class="error" id="password-error"></span>
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" id="confirm-password" placeholder="Confirm password" name="confirmPassword">
+                                <span class="error" id="confirm-password-error"></span>
+                            </div>
+                        
+                            <button type="submit">Sign up</button>
+                        </form>
+                        
+
+
+                        <div class="input-group">
+                            <button class="google-btn">
+                                <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
+                               <a href="/auth/google" style="text-decoration: none;"> <span>Continue with Google</span></a> 
+                             </button>
+                            
+                        </div>
+
+                        <!-- <div class="input-group">
+                            <button class="google-btn">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/640px-Facebook_Logo_%282019%29.png" alt="Google Logo">
+                                 <span>Continue with Facebook</span>
+                             </button>
+                            
+                        </div> -->
+
 						<p>
 							<span>
 								Already have an account?
@@ -389,24 +480,53 @@ body {
 			
 			</div>
 			<!-- END SIGN UP -->
+
 			<!-- SIGN IN -->
 			<div class="col align-items-center flex-col sign-in">
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-in">
-						<div class="input-group">
-							<i class='bx bxs-user'></i>
-							<input type="text" placeholder="Username">
-						</div>
-						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i>
-							<input type="password" placeholder="Password">
-						</div>
-						<button>
-							Sign in
-						</button>
+
+                        <form id="signin-form">
+                            <h2>Login Your Account</h2>
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                <input type="text" id="lusername" placeholder="Username">
+                                <span class="error" id="lusername-error"></span>
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" id="lpassword" placeholder="Password">
+                                <i class="bx bx-show" id="toggle-password"></i>
+                                <span class="error" id="lpassword-error"></span>
+                            </div>
+                        
+                            <button type="submit">
+                                Sign in
+                            </button>
+                        </form>
+                        
+
+                        <div class="input-group">
+                            <button class="google-btn">
+                                <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
+                               <a href="/auth/google" style="text-decoration: none;"> <span>Continue with Google</span></a> 
+                             </button>
+                            
+                        </div>
+
+                        <!-- <div class="input-group">
+                            <button class="google-btn">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/640px-Facebook_Logo_%282019%29.png" alt="Google Logo">
+                                 <span style="font-size: 13apx;">Continue with Facebook</span>
+                             </button>
+                            
+                        </div> -->
+
+
+
 						<p>
 							<b>
-								Forgot password?
+								<a href="/forgotpassword">Forgot password?</a>
 							</b>
 						</p>
 						<p>
@@ -424,6 +544,15 @@ body {
 				</div>
 			</div>
 			<!-- END SIGN IN -->
+
+
+          
+            
+
+           
+
+
+
 		</div>
 		<!-- END FORM SECTION -->
 		<!-- CONTENT SECTION -->
@@ -474,4 +603,208 @@ setTimeout(() => {
 	container.classList.add('sign-in')
 }, 200)
 </script>
+
+
+
+
+<!-- Include SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<!-- Login Script -->
+<script>
+  document.getElementById('signin-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    
+    // Clear previous errors
+    const errorMessages = document.querySelectorAll('.error');
+    errorMessages.forEach(message => message.textContent = '');
+
+    let isValid = true;
+
+    // Get the values of username (email) and password
+    const username = document.getElementById('lusername').value.trim();
+    const password = document.getElementById('lpassword').value.trim();
+
+    // Check if the fields are filled
+    if (username === "") {
+        document.getElementById('lusername-error').textContent = "Email is required.";
+        isValid = false;
+    }
+
+    if (password === "") {
+        document.getElementById('lpassword-error').textContent = "Password is required.";
+        isValid = false;
+    } else if (!validatePassword(password)) {
+        document.getElementById('lpassword-error').textContent = "Password must be at least 6 characters long, and include a number, special character, and letter.";
+        isValid = false;
+    }
+
+    // Submit form if valid
+    if (isValid) {
+        try {
+            // Show loading alert
+            Swal.fire({
+                title: "Processing...",
+                text: "Please wait while we log you in.",
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: username, password })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Login Successful",
+                    text: data.message || "Welcome back!",
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = "/"; // Redirect to home page or dashboard
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Login Failed",
+                    text: data.message || "Invalid email or password. Please try again."
+                });
+            }
+        } catch (error) {
+            console.error("Login Error:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "An error occurred. Please try again later."
+            });
+        }
+    }
+});
+
+function validatePassword(password) {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+    return regex.test(password);
+}
+
+</script>
+
+
+
+
+<!-- Signup Script -->
+<script>
+    document.getElementById('signup-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
+    
+        // Clear previous errors
+        document.querySelectorAll('.error').forEach(message => message.textContent = '');
+    
+        // Form validation
+        let isValid = true;
+    
+        // Get form values
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const confirmPassword = document.getElementById('confirm-password').value.trim();
+    
+        if (username === "") {
+            document.getElementById('username-error').textContent = "Username is required.";
+            isValid = false;
+        }
+    
+        if (email === "") {
+            document.getElementById('email-error').textContent = "Email is required.";
+            isValid = false;
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+            document.getElementById('email-error').textContent = "Please enter a valid email.";
+            isValid = false;
+        }
+    
+        if (password === "") {
+            document.getElementById('password-error').textContent = "Password is required.";
+            isValid = false;
+        } else if (!validatePassword(password)) {
+            document.getElementById('password-error').textContent = "Password must be at least 6 characters, include a letter, a number, and a special character.";
+            isValid = false;
+        }
+    
+        if (confirmPassword === "") {
+            document.getElementById('confirm-password-error').textContent = "Please confirm your password.";
+            isValid = false;
+        } else if (confirmPassword !== password) {
+            document.getElementById('confirm-password-error').textContent = "Passwords do not match.";
+            isValid = false;
+        }
+    
+        if (!isValid) return;
+    
+        // Prepare data
+        const formData = { name: username, email, password, confirmPassword };
+    
+        try {
+            // Show loading alert
+            Swal.fire({
+                title: "Processing...",
+                text: "Please wait while we create your account.",
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+    
+            const response = await fetch('/createaccount', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+    
+            const data = await response.json();
+    
+            if (data.success) {
+                Swal.fire({
+                    title: "Success!",
+                    text: data.message || "Account created successfully!",
+                    icon: "success",
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = data.redirect || "/dashboard"; // Redirect dynamically
+                });
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: data.message || "Something went wrong!",
+                    icon: "error"
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to create account. Please try again later.",
+                icon: "error"
+            });
+            console.error("Error:", error);
+        }
+    });
+    
+    // Password validation function
+    function validatePassword(password) {
+        return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/.test(password);
+    }
+    </script>
+    
 </html>
