@@ -1,0 +1,277 @@
+<%- include('partials/header') %>
+
+<style>
+    :root {
+        --primary-color: #4EA685;
+        --secondary-color: #57B894;
+        --black: #000000;
+        --white: #ffffff;
+        --gray: #efefef;
+        --gray-2: #757575;
+    }
+
+    body {
+        background-color: var(--gray);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .background-pattern {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color) 20%, var(--secondary-color) 80%);
+        clip-path: circle(60% at right 80%);
+        z-index: 1;
+    }
+
+    .verify-otp-card {
+        background: var(--white);
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        animation: slideIn 0.5s ease-in-out;
+        position: relative;
+        z-index: 2;
+        max-width: 450px;
+        width: 100%;
+        border: 3px solid var(--primary-color);
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border: none;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: var(--white);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .otp-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .otp-inputs input {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        font-size: 1.5rem;
+        border: 2px solid var(--primary-color);
+        border-radius: 10px;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .otp-inputs input:focus {
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .verify-otp-card h3 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+    }
+
+    .verify-otp-card p {
+        font-size: 1rem;
+        color: var(--gray-2);
+        margin-bottom: 20px;
+    }
+    .verify-otp-card button{
+        margin-top: 20px;
+        color: var(--white);
+    }
+
+    .timer {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-top: 15px;
+        color: var(--primary-color);
+    }
+
+    .resend-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        text-decoration: underline;
+    }
+
+    .resend-btn:hover {
+        color: var(--secondary-color);
+    }
+</style>
+
+<body>
+    <div class="background-pattern"></div>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="verify-otp-card">
+            <h3>Verify OTP</h3>
+            <p class="text-muted">Enter the OTP sent to your email.</p>
+            <form id="otpForm">
+                <div class="mb-4 otp-inputs">
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Verify OTP</button>
+            </form>
+            <p class="timer">Resend OTP in <span id="countdown">60</span> seconds</p>
+            <button class="resend-btn" id="resendOTP" style="display: none;">Resend OTP</button>
+        </div>
+    </div>
+
+    <!-- Include SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let inputs = document.querySelectorAll(".otp-inputs input");
+            let countdownElement = document.getElementById("countdown");
+            let resendBtn = document.getElementById("resendOTP");
+            let otpForm = document.getElementById("otpForm");
+            let timeLeft = 60;
+            let timer;
+
+            // Move cursor to next input
+            inputs.forEach((input, index) => {
+                input.addEventListener("input", (e) => {
+                    if (e.target.value && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Backspace" && index > 0 && !input.value) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+
+            // OTP Timer Countdown
+            function startTimer() {
+                timer = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        countdownElement.textContent = timeLeft;
+                    } else {
+                        clearInterval(timer);
+                        countdownElement.style.display = "none";
+                        resendBtn.style.display = "block";
+                    }
+                }, 1000);
+            }
+            startTimer();
+
+            // Resend OTP
+            resendBtn.addEventListener("click", () => {
+                timeLeft = 60;
+                countdownElement.textContent = timeLeft;
+                countdownElement.style.display = "block";
+                resendBtn.style.display = "none";
+
+                clearInterval(timer);
+                startTimer();
+
+                // Simulate API call
+                Swal.fire({
+                    icon: "success",
+                    title: "OTP Resent!",
+                    text: "A new OTP has been sent to your email.",
+                    heightAuto: false, 
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            });
+
+            // OTP Form Submission
+            otpForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                // Get OTP from inputs
+                let otp = "";
+                inputs.forEach(input => otp += input.value);
+
+                // Show loading animation
+                Swal.fire({
+                    title: "Verifying...",
+                    allowOutsideClick: false,
+                    heightAuto: false, 
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                // Simulate API call to /verifyForgotPasswordOtp
+                fetch("/veriyforgotPasswordopt", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ otp })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "OTP Verified!",
+                            heightAuto: false, 
+                            text: "You can now reset your password.",
+                        }).then(()=>{
+                             window.location.href = "/resetpassword"
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Invalid OTP",
+                            heightAuto: false, 
+                            text: "Please try again."
+                        });
+                    }
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Server Error",
+                        heightAuto: false, 
+                        text: "Something went wrong, please try again."
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
