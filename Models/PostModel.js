@@ -1,63 +1,60 @@
-import mongoose from "mongoose";
-
-
-
 const PostSchema = new mongoose.Schema(
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      caption: {
-        type: String,
-        maxlength: 2200, 
-        default: "",
-      },
-      imageUrl: {
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    caption: {
+      type: String,
+      maxlength: 2200, 
+      default: "",
+    },
+    imageUrls: [ 
+      {
         type: String,
         required: true, 
       },
-      likes: [
-        {
+    ],
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    comments: [
+      {
+        user: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "User",
+          required: true,
         },
-      ],
-      comments: [
-        {
-          user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true,
-          },
-          text: {
-            type: String,
-            required: true,
-            maxlength: 500, 
-          },
-          createdAt: {
-            type: Date,
-            default: Date.now,
-          },
-        },
-      ],
-      tags: [
-        {
+        text: {
           type: String,
+          required: true,
+          maxlength: 500, 
         },
-      ],
-      location: {
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    tags: [
+      {
         type: String,
-        default: "",
       },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-      },
+    ],
+    location: {
+      type: String,
+      default: "",
     },
-    { timestamps: true }
-  );
-  
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }
+);
 
-  export default mongoose.model("Post",PostSchema)
+export default mongoose.model("Post", PostSchema);

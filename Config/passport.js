@@ -55,6 +55,7 @@ passport.use(
             avatar: profile.photos?.[0]?.value || "",
             password: hashPassword,
           });
+          
 
           await user.save();
         }

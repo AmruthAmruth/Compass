@@ -1,5 +1,233 @@
 <%- include('partials/header') %>
+<style>
+    :root {
+        --primary-color: #4EA685;
+        --secondary-color: #57B894;
+        --black: #000000;
+        --white: #ffffff;
+        --gray: #efefef;
+        --gray-2: #757575;
+    }
+    *{
+        margin: 0%;
+        padding: 0%;
+    }
+    body {
+        background-color: var(--gray);
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+    }
+    .sidebar {
+        width: 260px;
+        background: var(--primary-color);
+        height: 100vh;
+        padding: 20px;
+        color: var(--white);
+        position: fixed;
+        transition: transform 0.3s ease-in-out;
+    }
+    .sidebar:hover {
+        transform: scale(1.02);
+    }
+    .sidebar a {
+        display: block;
+        color: var(--white);
+        padding: 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+        margin-bottom: 15px;
+    }
+    .sidebar a:hover {
+        background: var(--secondary-color);
+    }
+    .sidebar h3{
+        margin-bottom: 20px;
+    }
+    .stories {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        padding: 15px;
+        background: var(--white);
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .story {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+    }
+    .story img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 3px solid var(--secondary-color);
+        transition: transform 0.3s ease;
+    }
+    .story:hover img {
+        transform: scale(1.1);
+    }
+    .posts {
+        margin-top: 20px;
+        background: var(--white);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.6s ease-in-out;
+        display: flex;
+        justify-content: center;
+    }
+    .post {
+        width: 360px;
+    }
+    .post img {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+    .post-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        align-items: center;
+    }
+    .post-actions span {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .post-actions span:hover {
+        transform: scale(1.1);
+    }
+    .suggestions {
+        margin-top: 20px;
+        background: var(--white);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .suggestions h4 {
+        margin-bottom: 15px;
+    }
+    .suggestion-list {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        white-space: nowrap;
+    }
+    .suggestion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid var(--gray-2);
+        background: var(--gray);
+        min-width: 120px;
+    }
+    
+    .suggestion img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 5px;
+    }
+    .suggestion button {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 6px 30px 6px 30px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.suggestion button:hover {
+    background: #3d8c6e; /* Slightly darker shade */
+}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+<body>
+<div class="sidebar">
+    <h3>Compass</h3>
+    <a href="#"><i class="fa fa-home"></i> Home</a>
+    <a href="#"><i class="fa fa-bell"></i> Notifications</a>
+    <a href="#"><i class="fa fa-comment"></i> Messages</a>
+    <a href="#"><i class="fa fa-search"></i> Explore</a>
+    <a href="#"><i class="fa fa-plus"></i> Create Post</a>
+    <a href="#"><i class="fa fa-user"></i> Profile</a>
+    <a href="#"><i class="fa fa-cog"></i> Settings</a>
+</div>
+<div class="container" style="padding: 10px; margin-left: 280px; padding: 20px;">
+   
 
 
-<h1>Welcome to home page</h1>
+    <div class="stories">
+        <div class="story">
+            <img src="https://facecheck.id/img/authors/Siti-Hasan.webp" alt="Profile">
+            <small>Username1</small>
+        </div>
+        <div class="story">
+            <img src="https://facecheck.id/img/authors/Siti-Hasan.webp" alt="Profile">
+            <small>Username1</small>
+        </div>
+        <div class="story">
+            <img src="https://facecheck.id/img/authors/Siti-Hasan.webp" alt="Profile">
+            <small>Username1</small>
+        </div>
+    </div>
+    <div class="posts">
+        <div class="post">
+            <h5>User Name</h5>
+            <img src="https://imgs.search.brave.com/GV_9d0Cc2WGawnMKJyaO9D_9r7R7QaZvl5cL4Fnz7Mc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vZGlnaXRh/bC1waG90b2dyYXBo/eS1zY2hvb2wuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE2/LzA2L3BvcnRyYWl0/LWFuZ2xlczIuanBn/P3Jlc2l6ZT03NTAs/NTAwJnNzbD0x" alt="Post Image">
+            <div class="post-actions">
+                <span><i class="fa fa-heart"></i> 120</span>
+                <span><i class="fa fa-comment"></i> 45</span>
+                <span><i class="fa fa-share"></i> 10</span>
+            </div>
+        </div>
+    </div>
+    <div class="suggestions">
+        <h4>Suggested Accounts</h4>
+        <div class="suggestion-list">
+            <div class="suggestion">
+                <img src="https://facecheck.id/img/authors/Siti-Hasan.webp" alt="Profile">
+                <small>Username2</small>
+                <button>Follow</button>
+            </div>
+            <div class="suggestion">
+                <img src="https://facecheck.id/img/authors/Siti-Hasan.webp" alt="Profile">
+                <small>Username2</small>
+                <button>Follow</button>
+            </div>
+            <div class="suggestion">
+                <img src="https://facecheck.id/img/authors/Siti-Hasan.webp" alt="Profile">
+                <small>Username2</small>
+                <button>Follow</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="posts">
+        <div class="post">
+            <h5>User Name</h5>
+            <img src="https://imgs.search.brave.com/GV_9d0Cc2WGawnMKJyaO9D_9r7R7QaZvl5cL4Fnz7Mc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vZGlnaXRh/bC1waG90b2dyYXBo/eS1zY2hvb2wuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE2/LzA2L3BvcnRyYWl0/LWFuZ2xlczIuanBn/P3Jlc2l6ZT03NTAs/NTAwJnNzbD0x" alt="Post Image">
+            <div class="post-actions">
+                <span><i class="fa fa-heart"></i> 120</span>
+                <span><i class="fa fa-comment"></i> 45</span>
+                <span><i class="fa fa-share"></i> 10</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
 <%- include('partials/footer') %>

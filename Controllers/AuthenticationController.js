@@ -37,6 +37,7 @@ export const fornewpasswordPage = (req, res) => {
 
 
 
+// Create new account section
 
 
 
@@ -118,7 +119,6 @@ The Compass Team`
 
 
 
-
 export const verifyOTP = async (req, res) => {
   const { otp } = req.body;
   const tempUser = req.session.tempuser;
@@ -173,7 +173,7 @@ export const verifyOTP = async (req, res) => {
   });
 
   await newUser.save();
-  req.session.user = newUser;
+  req.session.user = newUser._id;
   otpStorage.delete(email);
   
   res.json({ success: true, message: "Account created successfully" });
@@ -245,6 +245,9 @@ export const login = async (req, res) => {
 
 
 
+// Forgot password section 
+
+
 
 
 export const forgotPassword = async (req, res) => {
@@ -260,7 +263,6 @@ export const forgotPassword = async (req, res) => {
           return res.status(400).json({ success: false, message: "User not found." });
       }
 
-      // Generate OTP
       let otp = otpGenerator.generate(4, { 
           digits: true, 
           upperCaseAlphabets: false, 
@@ -268,7 +270,7 @@ export const forgotPassword = async (req, res) => {
           specialChars: false 
       });
 
-      const otpExpires = Date.now() + 60 * 1000; // OTP expires in 1 min
+      const otpExpires = Date.now() + 60 * 1000;
       otpStorage.set(email, { otp, otpExpires });
 
       // Send OTP via email
