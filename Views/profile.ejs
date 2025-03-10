@@ -1,0 +1,105 @@
+<%- include('partials/header') %>
+
+
+<style>
+    :root {
+        --primary-color: #4EA685;
+        --secondary-color: #57B894;
+        --black: #000000;
+        --white: #ffffff;
+        --gray: #efefef;
+        --gray-2: #757575;
+    }
+    body {
+        background-color: var(--gray);
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;   
+    }
+    .profile-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: var(--white);
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    .profile-header img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid var(--secondary-color);
+    }
+    .profile-stats {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+    }
+    .profile-stats div {
+        text-align: center;
+    }
+    .edit-profile {
+        background: var(--primary-color);
+        color: var(--white);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+    }
+    .edit-profile:hover {
+        background: var(--secondary-color);
+    }
+    .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .posts-grid img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+</style>
+<body>
+<div class="profile-container">
+    <div class="profile-header">
+        <img src="https://imgs.search.brave.com/Feul-wKypFhz4QRcBpCGXIGoRmsA8kEp5jnWlNhEpkg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDkxMjQw/NDcuanBn" alt="Profile Picture">
+        <h2>Username</h2>
+        <p>Bio or short description</p>
+        <button class="edit-profile">Edit Profile</button>
+    </div>
+    <div class="profile-stats">
+        <div>
+            <h3>120</h3>
+            <p>Posts</p>
+        </div>
+        <div>
+            <h3>2.3K</h3>
+            <p>Followers</p>
+        </div>
+        <div>
+            <h3>530</h3>
+            <p>Following</p>
+        </div>
+    </div>
+    <div class="posts-grid">
+        <img src="https://imgs.search.brave.com/Feul-wKypFhz4QRcBpCGXIGoRmsA8kEp5jnWlNhEpkg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDkxMjQw/NDcuanBn" alt="Post 1">
+        <img src="https://imgs.search.brave.com/Feul-wKypFhz4QRcBpCGXIGoRmsA8kEp5jnWlNhEpkg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDkxMjQw/NDcuanBn" alt="Post 2">
+        <img src="https://imgs.search.brave.com/Feul-wKypFhz4QRcBpCGXIGoRmsA8kEp5jnWlNhEpkg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDkxMjQw/NDcuanBn" alt="Post 3">
+    </div>
+</div>
+</body>
+
+
+<%- include('partials/footer') %>
+

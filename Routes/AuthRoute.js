@@ -1,6 +1,7 @@
 import express from 'express'
 import { createAccount, forgotPassword, forgotPasswordPage, fornewpasswordPage, loadHomePage, loadLoginPage, login, otpPage, resentOTP, resetPassword, verifyForgotPasswordOTP, verifyOTP } from '../Controllers/AuthenticationController.js'
 import passport from 'passport'
+import { getProfile } from '../Controllers/userController.js';
 
 const Router=express.Router()
 
@@ -48,6 +49,12 @@ Router.get('/resetpassword',fornewpasswordPage)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+///////////////////////////////User Profile section//////////////////////////////////////////////
+
+Router.get('/profile',getProfile)
 
 
 
